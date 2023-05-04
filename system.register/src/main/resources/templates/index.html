@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        <div>
+            <header th:replace="~{layout/plantilla :: header}" />
+            <p></p>
+
+            <form action="#" th:action="@{/buscarNombre}" method="get">
+                <label for="nombre">Buscar paciente por nombre:</label>
+                <input type="text" id="nombrePaciente" name="nombrePaciente" required>
+                    <button type="submit">Buscar</button>
+            </form>
+
+            <form action="#" th:action="@{/buscarEnfermedad}" method="get">
+                <label for="enfermedad">Buscar paciente por enfermedad:</label>
+                <input type="text" id="enfermedad" name="enfermedad" required>
+                    <button type="submit">Buscar</button>
+            </form>
+
+
+            <h2>Inicio</h2>
+            <br/>
+            <!--<p th:text="${mensaje}"></p>
+            <p th:text="${mensajeProperties}"></p>   
+            <br/>
+
+            <!-- Valida si pacientes es vacío o null, en caso de que sí muestra mensaje -->
+            <a th:href="@{/agregar}">Agregar</a>
+            <br/>
+            <p></p>
+            <div th:if="${pacientes != null and !pacientes.empty}">
+                <table border="1">
+                    <tr>
+                        <th>Nombre Paciente</th>
+                        <th>Edad</th>
+                        <th>Sexo</th>
+                        <th>Enfermedad</th>
+                        <th>Sala</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                    <!-- Itera por cada objeto paciente -->
+                    <tr th:each="paciente : ${pacientes}">
+                        <td th:text="${paciente.nombrePaciente}">Muestra nombre paciente</td>
+                        <td th:text="${paciente.edad}">Muestra edad</td>
+                        <td th:text="${paciente.sexo}">Muestra sexo</td>
+                        <td th:text="${paciente.enfermedad}">Muestra enfermedad</td>
+                        <td th:text="${paciente.sala.nombre}">Muestra Sala</td>
+                        <!-- <td> <a th:href="@{/editar/} + ${paciente.id}"/>[[#{accion.editar}]]</td>                Método PATH VARIABLE -->
+                        <!-- <td> <a th:href="@{/eliminar(id=${paciente.id})}" th:text="#{accion.eliminar}"/></td>   Método QUERY PARAMETERS -->
+                        <td> <a th:href="@{/editar/} + ${paciente.id}"/>Editar</td>                
+                        <td> <a th:href="@{/eliminar(id=${paciente.id})}"/>Eliminar</td>   
+                    </tr>
+                </table>
+            </div>
+            <div>
+            </div>
+            <div th:if="${pacientes == null or pacientes.empty}">
+                Lista Vacía
+            </div>
+
+            <form action="#" th:action="@{/listarAdultos}" method="get">
+                <button method="get"  >Listar solo adultos</button>
+            </form>
+        </div>
+        <footer th:replace="~{layout/plantilla :: footer}" />
+    </body>
+</html>

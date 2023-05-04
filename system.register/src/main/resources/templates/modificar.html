@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Datos del paciente</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header" />
+        <h1>[[#{paciente.formulario}]]</h1>
+        <div>
+            <a th:href="@{/}">[[#{accion.regresar}]]</a>
+            <br/>
+        </div>
+        <div>
+            <form th:action="@{/guardar}" method="post" th:object="${paciente}">
+                <!-- Si existe id, lo modifica y no lo agrega -->
+                <input type="hidden" name="id" th:field="*{id}"/> 
+
+                <label for="nombrePaciente">Nombre Paciente:</label>
+                <input type="text" name="nombrePaciente" th:field="*{nombrePaciente}" min="3" max="90" />
+                <!-- Validaciones -->
+                <span th:if="${#fields.hasErrors('nombrePaciente')}" th:text="${#fields.errors('nombrePaciente')[0]}" class="error-message"></span>
+
+                <br/>
+
+                <label for="edad">[[#{paciente.edad}]]:</label>
+                <input type="text" name="edad" th:field="*{edad}" pattern="[0-9]{1,3}" min="0" max="100" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                <span th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}">Error edad</span>
+
+                <br/>
+
+                <label for="sexo">Sexo:</label>
+                <select name="sexo" th:field="*{sexo}">
+                    <option value="H">Hombre</option>
+                    <option value="M">Mujer</option>
+                </select>
+                <span th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}">Error sexo</span>
+                <br/>
+
+                <label for="enfermedad">[[#{paciente.enfermedad}]]:</label>
+                <input type="text" name="enfermedad" th:field="*{enfermedad}" required/>
+                <br/>
+
+                <label for="sala">[[#{paciente.sala}]]:</label>
+                <select name="sala" th:field="*{sala}" required>
+                    <option value=1>Sala Hospitalizacion</option>
+                    <option value=3>Sala UTI</option>
+                    <option value=4>Sala UCI</option>
+                    <option value=5>Sala Cuarentena</option>
+                </select>
+                <span th:if="${#fields.hasErrors('sala')}" th:errors="*{sala}">Error Sala</span>
+                <br/>
+
+                <input type="submit" name="guardar" th:value="#{accion.guardar}"/>
+
+            </form>
+        </div>
+        <footer th:replace="layout/plantilla :: footer" />
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Plantilla</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <header th:fragment="header">
+            <!--            <h1 th:text="#{plantilla.titulo}"></h1>-->
+            <h1>Control  Pacientes</h1>
+        </header> <!-- fragment es para reutilizar -->
+
+        <footer th:fragment="footer">
+            <div>
+                <br/><!-- comment -->
+                <a th:href="@{/(lang=es)}">ES</a>
+                <a th:href="@{/(lang=en)}">EN</a>
+                <p>Derechos Reservados <a href="https://www.google.cl" target="_blank"> Lolin Lolon</a></p>
+                <form method="POST" th:action="@{/logout}">
+                    <a href="#" onclick="this.parentNode.submit();">Logout</a> <!-- al momento de hacer submit se ejecuta path /logout -->
+                </form>
+            </div>
+        </footer>
+    </body>
+</html>
